@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta content="width=device-width, initial-scale=1" name="viewport">
+<title>Yves Vandewoude &amp; Valérie Fierens - WedSites</title>
+<meta content="The wedding website of Yves Vandewoude &amp; Valérie Fierens" name="description">
+<link rel="shortcut icon" type="image/x-icon" href="https://wedsites.com/favicon.ico" />
+<style>
+  #site {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
+</style>
+</head>
+<body>
+<iframe id="site">
+  <script>
+    window.location.replace("https://site-25851.wedsites.com/");
+  </script>
+</iframe>
+<script>
+  document.getElementById("site").src = "https://site-25851.wedsites.com" + window.location.hash.substr(1) + "#/reload";
+  window.addEventListener("message", (event) => {
+    if (event.origin.split('.').slice(1).join('.').replace(/\/$/, "") !== "wedsites.com") {
+      return;
+    }
+    if (event.data.reload) {
+      history.pushState(event.data.url, event.data.title, "/#" + event.data.path);
+    }
+    document.title = event.data.title;
+  }, false);
+
+  window.onpopstate = function(event) {
+    location.reload();
+  };
+</script>
+</body>
+</html>
